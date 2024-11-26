@@ -1,0 +1,48 @@
+name: Publish NuGet Packages for Packages.sln 
+
+on:
+  #  push:
+  #    branches:
+  #      - main
+  
+  workflow_dispatch: # This specifies that the workflow can be triggered manually
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x' # Specify the .NET version
+
+      # All solution
+      - name: Set up NuGet authentication
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.READ_PACKAGES_PAT }}
+          NUGET_USER: ${{ secrets.READ_PACKAGES_USER }}
+        run: |
+          dotnet nuget add source https://nuget.pkg.github.com/systomer/index.json \
+            --username $NUGET_USER \
+            --password $NUGET_AUTH_TOKEN \
+            --store-password-in-clear-text
+           
+      # Blazor.Component.Maps
+      
+      - name: Restore dependencies - Blazor.Component.Maps
+        run: dotnet restore ./Blazor.Component.Maps
+
+      - name: Build the project - Blazor.Component.Maps
+        run: dotnet build --configuration Release --no-restore ./Blazor.Component.Maps
+
+      - name: Pack the NuGet package - Blazor.Component.Maps
+        run: dotnet pack ./Blazor.Component.Maps --configuration Release --no-build --output ./nupkg
+
+      # Pushing all packages
+
+      - name: Push all NuGet packages
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.WRITE_PACKAGES_PAT }} --skip-duplicate --source https://nuget.pkg.github.com/systomer/index.json
