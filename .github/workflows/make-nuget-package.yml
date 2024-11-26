@@ -1,4 +1,4 @@
-name: Publish NuGet Packages for Packages.sln 
+name: Publish NuGet Packages
 
 on:
   #  push:
