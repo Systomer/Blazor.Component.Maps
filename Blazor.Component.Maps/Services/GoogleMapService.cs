@@ -293,7 +293,7 @@ namespace Blazor.Component.Maps
 						_dotNetObjectReference.Value.RemovePolygons(removedPolygons);
 
 						await _mapsJs.InvokeVoidAsync("removePolygons", MapContainerId,
-							(object)removedPolygons.Cast<GoogleMapMarkerBase>().ToArray());
+							(object)removedPolygons.Cast<GoogleMapPolygon>().ToArray());
 					}
 
 					////Update polygons NOT SUPPORTED
