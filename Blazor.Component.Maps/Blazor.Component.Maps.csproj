@@ -13,10 +13,10 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
-		<PackageReference Include="Microsoft.JSInterop" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="9.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.1" />
+		<PackageReference Include="Microsoft.JSInterop" Version="9.0.1" />
+		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="9.0.1" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 	</ItemGroup>
 
